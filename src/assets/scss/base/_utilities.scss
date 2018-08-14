@@ -1,0 +1,39 @@
+.u-center-text {
+    text-align: center !important;
+}
+
+.u-margin-bottom-big {
+    margin-bottom: $margin-big !important;
+
+    @include respond( tab-port ) {
+        margin-bottom: $margin-big - 3 !important;
+    }
+}
+
+.u-margin-bottom-medium {
+    margin-bottom: $margin-medium !important;
+    
+    @include respond( tab-port ) {
+        margin-bottom: $margin-medium - 2 !important;
+    }
+}
+
+.u-margin-bottom-small {
+    margin-bottom: $margin-small !important;
+}
+
+.u-margin-top-huge {
+    margin-bottom: $margin-huge !important;
+}
+
+.u-margin-top-big {
+    margin-bottom: $margin-big !important;
+}
+
+.u-margin-top-medium {
+    margin-bottom: $margin-medium !important;
+}
+
+.u-margin-top-small {
+    margin-bottom: $margin-small !important;
+}
