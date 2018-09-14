@@ -39,9 +39,7 @@ export function* initCardSaga(state) {
             }
         );
 
-        newState.answers = cardFunc.createAnswer(
-            newState.symbolObj[newState.symbolNr]
-        );
+        newState.answers = cardFunc.createAnswer(newState.symbolObj);
         console.log('newState', newState);
         yield put(
             actions.setInitiateApp({

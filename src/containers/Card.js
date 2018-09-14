@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import * as actions from '../store/actions/';
+
 import Answers from '../components/Answers/Answers';
+import Score from '../components/Card/Score/Score';
+
+import css from './Card.css';
 
 class Card extends Component {
     componentWillMount() {
@@ -31,63 +36,44 @@ class Card extends Component {
         // }
     };
 
+    clickAnswer = event => {
+        this.props.onClickAnswer({
+            value: event.target.value,
+            btnNr: event.target.dataset.btnnr
+        });
+    };
+
     render() {
         console.log('cardProp.cardState', this.props);
         if (this.props.cardState === 'LOADING') {
             return (
-                <div className="card card__UP card__nothing">
-                    <div className="card__side card__side--front">LOADING</div>
+                <div className={css.card}>
+                    <div
+                        className={[css.cardSide, css.cardSideFront].join(' ')}
+                    >
+                        LOADING
+                    </div>
                 </div>
             );
         }
-
+        const cardCss = [
+            css.card,
+            css[`card__${this.props.face}`],
+            css[
+                `card__ +
+        ${this.wrongAnsw(this.props.last_answer)}`
+            ]
+        ].join(' ');
         return (
-            <div
-                className={
-                    `card card__${this.props.face} card__` +
-                    this.wrongAnsw(this.props.last_answer)
-                }
-            >
-                <div className="card__side card__side--front">
-                    <div className="card__score">
-                        <div className="row">
-                            <div className="col-1-of-3 card__score--current u-margin-bottom-small">
-                                <div className="">Session Score</div>
-                                <div className="">
-                                    <span>&radic; </span>
-                                    {this.props.score.questions_correct}
-                                </div>
-                                <div className="">
-                                    <span>&times; </span>
-                                    {this.props.score.questions_failed}
-                                </div>
-                            </div>
-                            <div className="col-1-of-3 card__score--currentCard u-margin-bottom-small">
-                                <div className="">This Card</div>
-                                <div className="">
-                                    <span>&radic; </span>
-                                    {this.props.cardScore.questions_correct}
-                                </div>
-                                <div className="">
-                                    <span>&times; </span>
-                                    {this.props.cardScore.questions_failed}
-                                </div>
-                            </div>
-                            <div className="col-1-of-3 card__score--currentCard u-margin-bottom-small">
-                                <div className="">Total Score</div>
-                                <div className="">
-                                    <span>&radic; </span>
-                                    {this.props.pastScore.questions_correct}
-                                </div>
-                                <div className="">
-                                    <span>&times; </span>
-                                    {this.props.pastScore.questions_failed}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div className={cardCss}>
+                <div className={[css.cardSide, css.cardSideFront].join(' ')}>
+                    <Score
+                        score={this.props.score}
+                        cardScore={this.props.cardScore}
+                        pastScore={this.props.pastScore}
+                    />
 
-                    <div className="card__front--symbol">
+                    <div className={css.card__frontSymbol}>
                         {this.props.symbolObj.symbol}
                     </div>
                     <Answers
@@ -95,21 +81,24 @@ class Card extends Component {
                         answers={this.props.answers}
                         answered={this.props.answered}
                         symbolObj={this.props.symbolObj}
-                        click={this.props.click_answer}
+                        click={this.clickAnswer}
                     />
                 </div>
                 <div
-                    className="card__side card__side--back"
+                    className={[css.card__side, css.card__sideBack].join(' ')}
                     onClick={() => this.props.next_question(this.props)}
                 >
-                    <div className="card__back--inner">
-                        <div className="card__back--symbol card__back--flex">
+                    <div className={css.card__backInner}>
+                        <div
+                            className={[
+                                css.card__frontSymbol,
+                                css.card__backFlex
+                            ].join(' ')}
+                        >
                             {this.props.symbolObj.symbol}
                         </div>
-                        <div className="card__back--equal card__back--flex">
-                            =
-                        </div>
-                        <div className="card__back--answer card__back--flex">
+                        <div className={css.card__backFlex}>=</div>
+                        <div className={css.card__backFlex}>
                             {this.props.symbolObj.roman}
                         </div>
                     </div>
@@ -125,21 +114,25 @@ Card.contextTypes = {
 const mapStateToProps = state => {
     return {
         cardState: state.card.cardState,
+        face: state.card.face,
         fetchingSavedata: state.card.fetchingSavedata,
         symbolNr: state.card.symbolNr,
         symbolObj: state.card.symbolObj,
         answers: state.card.answers,
+        answered: state.card.answered,
         pastScore: state.card.pastScore,
         cardScore: state.card.cardScore,
         settings: state.card.settings,
-        score: state.card.score
+        score: state.card.score,
+        last_answer: state.card.last_answer
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInitiateApp: state => dispatch(actions.initiateApp(state))
-        // click_answer,
+        onInitiateApp: state => dispatch(actions.initiateApp(state)),
+        onClickAnswer: btnData => dispatch(actions.clickAnswer(btnData))
+
         // reset_last_answer,
         // next_question
     };

@@ -31,8 +31,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_INITIATE_APP:
-            console.log('INITIATE_APP');
-            console.log('INITIATE_APP >> action.payload', action);
             return {
                 ...state,
                 cardState: 'GO',
@@ -45,7 +43,10 @@ const reducer = (state = initialState, action) => {
                 cardScore: action.cardScore,
                 settings: action.settings
             };
-
+        case actionTypes.ANSWER_QUESTION:
+            return {
+                ...state
+            };
         default:
             return state;
     }

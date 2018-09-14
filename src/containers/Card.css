@@ -1,0 +1,48 @@
+.card {
+    perspective: 150rem;
+    position: relative;
+    text-align: center;
+    height: 60rem;
+    max-width: 80rem;
+    margin: 0 auto;
+}
+
+.cardSide {
+    height: 60rem;
+    transition: all 0.8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    backface-visibility: hidden;
+    border-radius: 2rem;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: all 0.5s;
+    opacity: 1;
+}
+
+.cardSideFront {
+    background-color: #fff;
+}
+
+.card__frontSymbol {
+    margin-bottom: 4rem;
+}
+
+.card__frontSymbol,
+.cardBackFlex {
+    font-size: 20rem;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.cardSideBack {
+    padding: 5rem;
+    transform: rotateY(180deg);
+    background-image: linear-gradient(to right bottom, #7ed56f, #28b485);
+}
+
+.cardBackInner {
+    opacity: 0;
+}

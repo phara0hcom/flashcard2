@@ -1,0 +1,101 @@
+.btn {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 5rem;
+    transition: all 0.2s;
+    position: relative;
+    font-size: 1.6rem;
+    border: none;
+    cursor: pointer;
+}
+
+.btn::after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn:active,
+.btn:focus {
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btnPrime {
+    width: 100%;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    border: none;
+    border-bottom: 2px solid #0351b8;
+    border-radius: 10rem;
+    background-image: linear-gradient(to bottom, #2998ff, #1e77ec);
+    color: #fff;
+    cursor: pointer;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+}
+
+.btnPrime:disabled {
+    border: none;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#333),
+        to(#999)
+    );
+    background-image: -webkit-linear-gradient(top, #333, #999);
+    background-image: -o-linear-gradient(top, #333, #999);
+    background-image: linear-gradient(to bottom, #333, #999);
+    -webkit-box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+    color: red;
+    text-shadow: none;
+}
+.btnPrime:disabled:hover {
+    -webkit-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.btnPrime:disabled:hover::after {
+    -webkit-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+    opacity: 0;
+}
+.btnPrimeCorrect:disabled {
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#7ed56f),
+        to(#28b485)
+    );
+    background-image: -webkit-linear-gradient(top, #7ed56f, #28b485);
+    background-image: -o-linear-gradient(top, #7ed56f, #28b485);
+    background-image: linear-gradient(to bottom, #7ed56f, #28b485);
+    color: green;
+}

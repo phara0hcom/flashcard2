@@ -4,7 +4,13 @@ export const returnDeck = state => {
     let customDeck = [];
     const decksNames = state.settings.decks;
     customDeck = decksNames.map(decksName => decks[decksName]);
-    return customDeck;
+    let customDeckRtn = [];
+    customDeck.forEach(element => {
+        console.log('element', element);
+        customDeckRtn = customDeckRtn.concat(element);
+    });
+    console.log('customDeckRtn', customDeckRtn);
+    return customDeckRtn;
 };
 
 export const getLocalStore = async (name, defaultVal) => {
@@ -82,20 +88,24 @@ export const getCustomDeckObj = state => {
 };
 
 export const getCurrentSymbol = (state, symbolNr) => {
-    console.log('getCurrentSymbol', state);
-    console.log('symbolNr', symbolNr);
+    console.log('getCurrentSymbol >> state', state);
+    console.log('getCurrentSymbol >> symbolNr', symbolNr);
     const concatDecks = returnDeck(state);
+    console.log('getCurrentSymbol >> concatDecks', concatDecks);
 
     switch (state.settings.deckFunc) {
         case 'RANDOM':
             return concatDecks[symbolNr];
 
         case 'RANDOM_IN_DECK':
-            // console.log("getCurrentSymbol symbolNr", symbolNr);
-            // console.log(
-            //   "getCurrentSymbol state.customDeck[symbolNr]",
-            //   state.customDeck[symbolNr]
-            // );
+            console.log(
+                'getCurrentSymbol >> state.customDeck[symbolNr]',
+                state.customDeck[symbolNr]
+            );
+            console.log(
+                'getCurrentSymbol >> concatDecks[state.customDeck[symbolNr]]',
+                concatDecks[state.customDeck[symbolNr]]
+            );
             return concatDecks[state.customDeck[symbolNr]];
 
         default:

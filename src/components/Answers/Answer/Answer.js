@@ -1,13 +1,17 @@
 import React from 'react';
+import css from './Answer.css';
 
 const answer = props => {
     let disblesAttr = false;
-    const stringKey = props.key + '';
-    const correctAnsClass = props.answer.correct ? ' btn-prime-correct' : '';
+    const stringKey = props.id + '';
+    const correctAnsClass = props.correct ? css.btnPrimeCorrect : null;
+
+    const btnClass = [css.btn, css.btnPrime, correctAnsClass].join(' ');
 
     if (props.lastAnswer === true) {
         disblesAttr = true;
     }
+
     if (props.answered.indexOf(stringKey) !== -1) {
         disblesAttr = true;
     }
@@ -16,9 +20,9 @@ const answer = props => {
             type="button"
             data-btnnr={stringKey}
             disabled={disblesAttr}
-            className={`btn btn-prime ${correctAnsClass}`}
+            className={btnClass}
             onClick={props.click}
-            key={`answerBtnKey_${props.key}`}
+            key={`answerBtnKey_${props.id}`}
             value={props.symbol}
         />
     );

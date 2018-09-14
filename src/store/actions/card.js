@@ -21,3 +21,10 @@ export const initiateApp = state => {
         type: actionTypes.INITIATE_APP
     };
 };
+
+export const clickAnswer = btnData => {
+    return {
+        type: actionTypes.ANSWER_QUESTION,
+        ...btnData
+    };
+};

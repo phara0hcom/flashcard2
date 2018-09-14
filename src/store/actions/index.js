@@ -1,1 +1,6 @@
-export { initiateApp, initiateAppFailed, setInitiateApp } from './card';
+export {
+    initiateApp,
+    initiateAppFailed,
+    setInitiateApp,
+    clickAnswer
+} from './card';
