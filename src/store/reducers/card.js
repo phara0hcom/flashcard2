@@ -44,6 +44,7 @@ const reducer = (state = initialState, action) => {
                 settings: action.settings
             };
         case actionTypes.ANSWER_QUESTION:
+            console.log('ANSWER_QUESTION action', action);
             return {
                 ...state
             };

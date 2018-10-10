@@ -12,7 +12,7 @@ const Answers = props => {
                     id={i}
                     {...data}
                     answer={data}
-                    onClick={props.click}
+                    click={props.click}
                     lastAnswer={props.lastAnswer}
                     answered={props.answered}
                 />

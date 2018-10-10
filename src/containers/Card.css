@@ -30,11 +30,26 @@
     margin-bottom: 4rem;
 }
 
+.card__UP .cardSideBack .cardBackInner {
+    opacity: 0;
+}
+
 .card__frontSymbol,
-.cardBackFlex {
+.card__backFlex {
     font-size: 20rem;
     line-height: 1;
     text-transform: uppercase;
+}
+
+@media only screen and (max-width: 37.5em) {
+    .card__backFlex {
+        font-size: 15rem;
+    }
+}
+
+.card__backFlex {
+    align-self: center;
+    text-shadow: 1px 1px 7px rgba(0, 0, 0, 0.9);
 }
 
 .cardSideBack {
@@ -43,6 +58,231 @@
     background-image: linear-gradient(to right bottom, #7ed56f, #28b485);
 }
 
+.card__correct .cardSideFront {
+    animation-name: cardCorrect;
+    animation-duration: 0.8s;
+}
+
+.card__wrong .cardSideFront {
+    animation-name: cardFail;
+    animation-duration: 0.8s;
+}
+
+.card__DOWN .cardSideFront {
+    animation-name: cardCorrect;
+    animation-duration: 0.8s;
+    transition-delay: 0.7s;
+    transform: rotateY(-180deg);
+    position: relative;
+}
+.card__DOWN .cardSideBack {
+    transition-delay: 0.7s;
+    transform: rotateY(0deg);
+}
+
 .cardBackInner {
-    opacity: 0;
+    border-radius: 2rem;
+    border: 2rem solid #fff;
+    height: 100%;
+    /*background-image: url(images/escheresque-dark.png);*/
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+@keyframes cardCorrect {
+    from {
+        background-color: transparent;
+        background-position: 0%;
+        background-image: -webkit-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        background-image: -o-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        background-image: linear-gradient(
+            170deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        -webkit-background-size: 700% 700%;
+        background-size: 700%;
+    }
+    5% {
+        background-color: transparent;
+        background-position: 0%;
+        background-image: -webkit-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        background-image: -o-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        background-image: linear-gradient(
+            170deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        -webkit-background-size: 700% 700%;
+        background-size: 700%;
+    }
+    50% {
+        background-color: transparent;
+        background-position: 100%;
+        background-image: -webkit-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        background-image: -o-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        background-image: linear-gradient(
+            170deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        -webkit-background-size: 700% 700%;
+        background-size: 700%;
+        color: #fff;
+    }
+    to {
+        background-position: 0%;
+        background-image: -webkit-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        background-image: -o-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        background-image: linear-gradient(
+            170deg,
+            transparent 0%,
+            transparent 50%,
+            #7ed56f 50%,
+            #28b485 100%
+        );
+        -webkit-background-size: 700% 700%;
+        background-size: 700%;
+    }
+}
+
+@keyframes cardFail {
+    from {
+        background-color: transparent;
+        background-position: 0%;
+        background-image: -webkit-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #ff5e49 50%,
+            #aa1502 100%
+        );
+        background-image: -o-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #ff5e49 50%,
+            #aa1502 100%
+        );
+        background-image: linear-gradient(
+            170deg,
+            transparent 0%,
+            transparent 50%,
+            #ff5e49 50%,
+            #aa1502 100%
+        );
+        -webkit-background-size: 700% 700%;
+        background-size: 700%;
+    }
+    50% {
+        background-color: transparent;
+        background-position: 100%;
+        background-image: -webkit-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #ff5e49 50%,
+            #aa1502 100%
+        );
+        background-image: -o-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #ff5e49 50%,
+            #aa1502 100%
+        );
+        background-image: linear-gradient(
+            170deg,
+            transparent 0%,
+            transparent 50%,
+            #ff5e49 50%,
+            #aa1502 100%
+        );
+        -webkit-background-size: 700% 700%;
+        background-size: 700%;
+        color: #fff;
+    }
+    to {
+        background-position: 0%;
+        background-image: -webkit-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #ff5e49 50%,
+            #aa1502 100%
+        );
+        background-image: -o-linear-gradient(
+            280deg,
+            transparent 0%,
+            transparent 50%,
+            #ff5e49 50%,
+            #aa1502 100%
+        );
+        background-image: linear-gradient(
+            170deg,
+            transparent 0%,
+            transparent 50%,
+            #ff5e49 50%,
+            #aa1502 100%
+        );
+        -webkit-background-size: 700% 700%;
+        background-size: 700%;
+    }
 }

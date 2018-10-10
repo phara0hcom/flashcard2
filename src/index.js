@@ -14,9 +14,10 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 const composeEnhancers =
-    process.env.NODE_ENV === 'development'
+    process.env.NODE_ENV === 'development' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        : null || compose;
+        : compose;
 
 const rootReducer = combineReducers({
     card: cardReducer

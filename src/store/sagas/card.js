@@ -20,16 +20,14 @@ export function* initCardSaga(state) {
             settings,
             pastScore
         };
-        console.log(newState);
+
         newState.symbolNr = yield cardFunc.chooseNextSyNr(newState);
         newState.customDeck = yield cardFunc.getCustomDeckObj(newState);
 
-        console.log('symbolNr', newState.symbolNr);
         newState.symbolObj = yield cardFunc.getCurrentSymbol(
             newState,
             newState.symbolNr
         );
-        console.log('symbolObj', newState.symbolObj);
 
         newState.cardScore = yield cardFunc.getLocalStore(
             newState.symbolObj.index,
@@ -40,7 +38,7 @@ export function* initCardSaga(state) {
         );
 
         newState.answers = cardFunc.createAnswer(newState.symbolObj);
-        console.log('newState', newState);
+
         yield put(
             actions.setInitiateApp({
                 ...newState

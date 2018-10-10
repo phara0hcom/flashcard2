@@ -21,7 +21,7 @@ const answer = props => {
             data-btnnr={stringKey}
             disabled={disblesAttr}
             className={btnClass}
-            onClick={props.click}
+            onClick={() => props.click(stringKey, props.correct)}
             key={`answerBtnKey_${props.id}`}
             value={props.symbol}
         />
