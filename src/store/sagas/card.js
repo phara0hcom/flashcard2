@@ -49,3 +49,14 @@ export function* initCardSaga(state) {
         yield put(actions.initiateAppFailed(error));
     }
 }
+
+export function* nextQuestionSaga(state) {
+    try {
+        console.log('nextQuestionSaga state', state);
+        const newState = yield cardFunc.chooseNext(state);
+        newState.answers = cardFunc.createAnswer(newState.symbolObj);
+        yield put(actions.setNextQuestion(newState));
+    } catch (error) {
+        console.log('nextQuestionSaga ERROR', error);
+    }
+}

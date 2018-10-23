@@ -48,6 +48,19 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state
             };
+        case actionTypes.SET_NEXT_QUESTION:
+            console.log('SET_NEXT_QUESTION action', action);
+            return {
+                ...state,
+                answers: action.answers,
+                face: 'UP',
+                cardScore: {
+                    questions_failed: action.cardScore.questions_failed,
+                    questions_correct: action.cardScore.questions_correct
+                },
+                symbolNr: action.symbolNr,
+                symbolObj: action.symbolObj
+            };
         default:
             return state;
     }

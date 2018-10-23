@@ -2,5 +2,7 @@ export {
     initiateApp,
     initiateAppFailed,
     setInitiateApp,
-    clickAnswer
+    clickAnswer,
+    nextQuestion,
+    setNextQuestion
 } from './card';

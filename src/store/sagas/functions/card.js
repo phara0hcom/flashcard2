@@ -1,5 +1,27 @@
 import decks from '../../../decks/';
 
+export const chooseNext = state => {
+    console.log('chooseNext state.symbolNr', state.symbolNr);
+    const symbolNr = chooseNextSyNr(state);
+    console.log('chooseNext symbolNr', symbolNr);
+    const symbolObj = getCurrentSymbol(state, symbolNr);
+    console.log('chooseNext symbolObj', symbolObj);
+
+    return new Promise((resolve, reject) => {
+        getLocalStore(state.symbolObj.index, {
+            questions_failed: 0,
+            questions_correct: 0
+        })
+            .then(cardScore => {
+                console.log({ symbolNr, cardScore, symbolObj });
+                resolve({ symbolNr, cardScore, symbolObj });
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+};
+
 export const returnDeck = state => {
     let customDeck = [];
     const decksNames = state.settings.decks;

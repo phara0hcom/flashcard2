@@ -7,6 +7,11 @@
     margin: 0 auto;
 }
 
+.card,
+.card *:not(input) {
+    cursor: default;
+}
+
 .cardSide {
     height: 60rem;
     transition: all 0.8s ease;
@@ -56,6 +61,11 @@
     padding: 5rem;
     transform: rotateY(180deg);
     background-image: linear-gradient(to right bottom, #7ed56f, #28b485);
+}
+
+.cardSideBack,
+.cardSideBack * {
+    cursor: pointer !important;
 }
 
 .card__correct .cardSideFront {

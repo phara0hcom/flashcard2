@@ -53,6 +53,16 @@ class Card extends Component {
         });
     };
 
+    next_question = () => {
+        console.log('this.next_question', this.props);
+        this.props.nextQuestion(this.props);
+        this.setState({
+            face: 'UP',
+            last_answer: null,
+            answered: []
+        });
+    };
+
     render() {
         if (this.props.cardState === 'LOADING') {
             return (
@@ -93,7 +103,7 @@ class Card extends Component {
                 </div>
                 <div
                     className={[css.cardSide, css.cardSideBack].join(' ')}
-                    onClick={() => this.props.next_question(this.props)}
+                    onClick={this.next_question}
                 >
                     <div className={css.cardBackInner}>
                         <div
@@ -121,6 +131,7 @@ Card.contextTypes = {
 const mapStateToProps = state => {
     return {
         cardState: state.card.cardState,
+        customDeck: state.card.customDeck,
         fetchingSavedata: state.card.fetchingSavedata,
         symbolNr: state.card.symbolNr,
         symbolObj: state.card.symbolObj,
@@ -135,10 +146,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onInitiateApp: state => dispatch(actions.initiateApp(state)),
-        onClickAnswer: btnData => dispatch(actions.clickAnswer(btnData))
-
-        // reset_last_answer,
-        //next_question:
+        onClickAnswer: btnData => dispatch(actions.clickAnswer(btnData)),
+        nextQuestion: state => dispatch(actions.nextQuestion(state))
     };
 };
 
