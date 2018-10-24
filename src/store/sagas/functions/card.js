@@ -1,4 +1,5 @@
 import decks from '../../../decks/';
+import { jsonDecode } from '../../../shared/utility';
 
 export const chooseNext = state => {
     console.log('chooseNext state.symbolNr', state.symbolNr);
@@ -25,6 +26,9 @@ export const chooseNext = state => {
 export const returnDeck = state => {
     let customDeck = [];
     const decksNames = state.settings.decks;
+    console.log('returnDeck state', state);
+    console.log('returnDeck state.settings', state.settings);
+    console.log('returnDeck decksNames', decksNames);
     customDeck = decksNames.map(decksName => decks[decksName]);
     let customDeckRtn = [];
     customDeck.forEach(element => {
@@ -34,17 +38,35 @@ export const returnDeck = state => {
 };
 
 export const getLocalStore = async (name, defaultVal) => {
-    const settings = await localStorage.getItem(name);
-    if (settings) {
+    const localStoreStr = await localStorage.getItem(name);
+    const jsonSettings = jsonDecode(localStoreStr);
+
+    if (jsonSettings) {
         return {
             ...defaultVal,
-            settings
+            ...jsonSettings
+        };
+    }
+    if (localStoreStr) {
+        return {
+            ...defaultVal,
+            [name]: localStoreStr
         };
     } else {
-        await localStorage.setItem(name, defaultVal);
-        return {
-            ...defaultVal
-        };
+        let saveStr = defaultVal;
+        if (typeof defaultVal === 'object') {
+            saveStr = JSON.stringify(defaultVal);
+        }
+        await localStorage.setItem(name, saveStr);
+        if (typeof defaultVal === 'object') {
+            return {
+                ...defaultVal
+            };
+        } else {
+            return {
+                [name]: defaultVal
+            };
+        }
     }
 };
 

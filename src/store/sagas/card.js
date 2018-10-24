@@ -11,6 +11,8 @@ export function* initCardSaga(state) {
             'appSettings',
             state.settings
         );
+        console.log('initCardSaga state.settings:', state.settings);
+        console.log('initCardSaga settings:', settings);
         const pastScore = yield cardFunc.getLocalStore('pastScore', {
             questions_failed: 0,
             questions_correct: 0
