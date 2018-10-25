@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-//import { CSSTransition } from 'react-transition-group';
 
 import * as actions from '../store/actions/';
 
@@ -14,7 +13,19 @@ class Card extends Component {
     state = {
         face: 'UP',
         last_answer: null,
-        answered: []
+        answered: [],
+        score: {
+            questions_failed: 0,
+            questions_correct: 0
+        },
+        cardScore: {
+            questions_failed: 0,
+            questions_correct: 0
+        },
+        pastScore: {
+            questions_failed: 0,
+            questions_correct: 0
+        }
     };
 
     componentWillMount() {
@@ -29,12 +40,35 @@ class Card extends Component {
         console.log(last_answer);
         if (last_answer === false) {
             setTimeout(() => {
-                this.setState({ last_answer: null });
+                this.setState(prevState => {
+                    const newScore = {
+                        ...prevState.score
+                    };
+                    return {
+                        last_answer: null,
+                        score: {
+                            questions_failed: newScore.questions_failed + 1,
+                            questions_correct: newScore.questions_correct
+                        }
+                    };
+                });
             }, 800);
             return 'wrong';
         } else if (last_answer === true) {
             setTimeout(() => {
-                this.setState({ last_answer: null, face: 'DOWN' });
+                this.setState(prevState => {
+                    const newScore = {
+                        ...prevState.score
+                    };
+                    return {
+                        last_answer: null,
+                        face: 'DOWN',
+                        score: {
+                            questions_failed: newScore.questions_failed,
+                            questions_correct: newScore.questions_correct + 1
+                        }
+                    };
+                });
             }, 800);
             return 'correct';
         } else {
@@ -59,8 +93,26 @@ class Card extends Component {
         this.setState({
             face: 'UP',
             last_answer: null,
-            answered: []
+            answered: [],
+            cardScore: {
+                questions_failed: 0,
+                questions_correct: 0
+            },
+            pastScore: {
+                questions_failed: 0,
+                questions_correct: 0
+            }
         });
+    };
+
+    scoreCalc = (past, current) => {
+        const failed = past.questions_failed + current.questions_failed;
+        const correct = past.questions_correct + current.questions_correct;
+
+        return {
+            questions_failed: failed,
+            questions_correct: correct
+        };
     };
 
     render() {
@@ -81,13 +133,22 @@ class Card extends Component {
             css[`card__${this.wrongAnsw(this.state.last_answer)}`]
         ].join(' ');
         console.log('cardCss >>', cardCss);
+        const sessionScore = this.scoreCalc(this.props.score, this.state.score);
+        const scoreCard = this.scoreCalc(
+            this.props.cardScore,
+            this.state.cardScore
+        );
+        const pastScore = this.scoreCalc(
+            this.props.pastScore,
+            this.state.pastScore
+        );
         return (
             <div className={cardCss}>
                 <div className={[css.cardSide, css.cardSideFront].join(' ')}>
                     <Score
-                        score={this.props.score}
-                        cardScore={this.props.cardScore}
-                        pastScore={this.props.pastScore}
+                        score={sessionScore}
+                        cardScore={scoreCard}
+                        pastScore={pastScore}
                     />
 
                     <div className={css.card__frontSymbol}>

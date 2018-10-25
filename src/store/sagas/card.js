@@ -17,6 +17,7 @@ export function* initCardSaga(state) {
             questions_failed: 0,
             questions_correct: 0
         });
+        console.log('pastScore >> ', pastScore);
         const newState = {
             ...state,
             settings,
